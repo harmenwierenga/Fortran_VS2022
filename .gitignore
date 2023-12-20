@@ -1,0 +1,4 @@
+.vs/**
+Fortran_language_server_protocol/bin/**
+Fortran_language_server_protocol/obj/**
+Fortran_language_server_protocol/.vs/**
