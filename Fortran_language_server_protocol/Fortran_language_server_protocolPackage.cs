@@ -8,38 +8,27 @@ using Microsoft.VisualStudio.Threading;
 using Microsoft.VisualStudio.Utilities;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Reflection;
 using System.Threading.Tasks;
 using System.ComponentModel.Composition;
 using System.IO;
 
 namespace Fortran_language_server_protocol
 {
-    /// <summary>
-    /// This is the class that implements the package exposed by this assembly.
-    /// </summary>
-    /// <remarks>
-    /// <para>
-    /// The minimum requirement for a class to be considered a valid package for Visual Studio
-    /// is to implement the IVsPackage interface and register itself with the shell.
-    /// This package uses the helper classes defined inside the Managed Package Framework (MPF)
-    /// to do it: it derives from the Package class that provides the implementation of the
-    /// IVsPackage interface and uses the registration attributes defined in the framework to
-    /// register itself and its components with the shell. These attributes tell the pkgdef creation
-    /// utility what data to put into .pkgdef file.
-    /// </para>
-    /// <para>
-    /// To get loaded into VS, the package must be referred by &lt;Asset Type="Microsoft.VisualStudio.VsPackage" ...&gt; in .vsixmanifest file.
-    /// </para>
-    /// </remarks>
     [PackageRegistration(UseManagedResourcesOnly = true, AllowsBackgroundLoading = true)]
     [Guid(Fortran_language_server_protocolPackage.PackageGuidString)]
     [Export(typeof(ILanguageClient))]
+    [ContentType("fortran")]
+    [ProvideMenuResource("Menus.ctmenu", 1)]
     public sealed class Fortran_language_server_protocolPackage : AsyncPackage, ILanguageClient
     {
-        /// <summary>
-        /// Fortran_language_server_protocolPackage GUID string.
-        /// </summary>
+        private readonly IEnumerable<string> filesToWatch;
+        public Fortran_language_server_protocolPackage()
+        {
+            filesToWatch = new List<string> {"*.f", "*.F", "*.f77", "*.F77",
+                    "*.f90", "*.F90", "*.f95", "*.F95", "*.f03", "*.F03",
+                    "*.f08", "*.F08", "*.f18", "*.F18", "*.f23", "*.F23"};
+        }
+
         public const string PackageGuidString = "9ac7db48-d27e-4e3d-84e8-fb93bf93b968";
         public string Name => "Fortran Language Extension";
         public IEnumerable<string> ConfigurationSections => null;
@@ -50,9 +39,7 @@ namespace Fortran_language_server_protocol
         {
             get
             {
-                return new List<string> () {"*.f", "*.F", "*.f77", "*.F77",
-                    "*.f90", "*.F90", "*.f95", "*.F95", "*.f03", "*.F03",
-                    "*.f08", "*.F08", "*.f18", "*.F18", "*.f23", "*.F23"};
+                return filesToWatch;
             }
         }
 
@@ -63,7 +50,7 @@ namespace Fortran_language_server_protocol
         {
             await Task.Yield();
 
-            string programPath = "C:\\Python311\\Scripts\\fortls.exe";
+            string programPath = "C:\\Users\\wierenga\\AppData\\Local\\Programs\\Python\\Python311\\Scripts\\fortls.exe";
             ProcessStartInfo info = new ProcessStartInfo
             {
                 Arguments = "",
