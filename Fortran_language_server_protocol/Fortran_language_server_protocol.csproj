@@ -50,27 +50,15 @@
     <Compile Include="Fortran_language_server_protocolPackage.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Grammars\fortran_fixed-form.tmLanguage">
-      <IncludeInVSIX>true</IncludeInVSIX>
-    </Content>
     <Content Include="Grammars\fortran_free-form.tmLanguage">
       <IncludeInVSIX>true</IncludeInVSIX>
     </Content>
-    <Content Include="Grammars\openacc_lang.tmLanguage">
-      <IncludeInVSIX>true</IncludeInVSIX>
-    </Content>
-    <Content Include="Grammars\openmp_lang.tmLanguage">
+    <Content Include="Grammars\LICENSE.txt">
       <IncludeInVSIX>true</IncludeInVSIX>
     </Content>
     <None Include="source.extension.vsixmanifest">
       <SubType>Designer</SubType>
     </None>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Fortran_language_server_protocol.pkgdef">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      <IncludeInVSIX>true</IncludeInVSIX>
-    </Content>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
@@ -91,6 +79,10 @@
     <PackageReference Include="Microsoft.VSSDK.BuildTools" Version="17.8.2365" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="languages.pkgdef">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
     <Content Include="Logo\fortran_logo_128x128.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <IncludeInVSIX>true</IncludeInVSIX>

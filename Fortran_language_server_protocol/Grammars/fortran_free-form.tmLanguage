@@ -10,6 +10,14 @@
     <string>source.fortran.free</string>
     <key>fileTypes</key>
     <array>
+<!-- Apply these rules to fixed-form too, since visual studio does not appear to cope with includes of other grammars -->
+      <string>f</string>
+      <string>F</string>
+      <string>f77</string>
+      <string>F77</string>
+      <string>for</string>
+      <string>FOR</string>
+<!-- Free form file extensions -->
       <string>f90</string>
       <string>F90</string>
       <string>f95</string>

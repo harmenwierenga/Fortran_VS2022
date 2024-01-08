@@ -1,2 +1,3 @@
+﻿; Registers the language grammar files with Visual Studio
 [$RootKey$\TextMate\Repositories]
 "Fortran"="$PackageFolder$\Grammars"
