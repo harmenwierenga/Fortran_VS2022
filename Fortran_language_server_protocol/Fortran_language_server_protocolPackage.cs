@@ -18,7 +18,6 @@ namespace Fortran_language_server_protocol
     [Guid(Fortran_language_server_protocolPackage.PackageGuidString)]
     [Export(typeof(ILanguageClient))]
     [ContentType("fortran")]
-    [ProvideMenuResource("Menus.ctmenu", 1)]
     public sealed class Fortran_language_server_protocolPackage : AsyncPackage, ILanguageClient
     {
         private readonly IEnumerable<string> filesToWatch;
