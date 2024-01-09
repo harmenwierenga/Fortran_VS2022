@@ -18,6 +18,8 @@ namespace Fortran_language_server_protocol
     [Guid(Fortran_language_server_protocolPackage.PackageGuidString)]
     [Export(typeof(ILanguageClient))]
     [ContentType("fortran")]
+    [ProvideMenuResource("Menus.ctmenu", 1)]
+    [ProvideOptionPage(typeof(OptionPageGrid), "Fortran Language Server", "Options", 0, 0, true)]
     public sealed class Fortran_language_server_protocolPackage : AsyncPackage, ILanguageClient
     {
         private readonly IEnumerable<string> filesToWatch;
@@ -49,12 +51,12 @@ namespace Fortran_language_server_protocol
         {
             await Task.Yield();
 
-            string programPath = "C:\\Users\\wierenga\\AppData\\Local\\Programs\\Python\\Python311\\Scripts\\fortls.exe";
+            OptionPageGrid page = (OptionPageGrid)GetDialogPage(typeof(OptionPageGrid));
+
             ProcessStartInfo info = new ProcessStartInfo
             {
-                Arguments = "",
-                FileName = programPath,
-                WorkingDirectory = Path.GetDirectoryName(programPath),
+                FileName = page.LanguageServerExecutable,
+                Arguments = page.LanguageServerArguments,
                 RedirectStandardInput = true,
                 RedirectStandardOutput = true,
                 UseShellExecute = false,
