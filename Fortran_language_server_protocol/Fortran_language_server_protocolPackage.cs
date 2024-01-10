@@ -50,7 +50,7 @@ namespace Fortran_language_server_protocol
 
             int numThreads = Math.Max(Environment.ProcessorCount - 2, 1);
             string fileName = "fortls";
-            string arguments = String.Format("--nthreads {0} --incl_suffixes F18 F23 --lowercase_intrinsics --incremental_sync", numThreads);
+            string arguments = String.Format("--nthreads {0} --lowercase_intrinsics --incremental_sync", numThreads);
 
             ProcessStartInfo info = new ProcessStartInfo
             {
