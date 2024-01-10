@@ -46,9 +46,6 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="FortranContentDefinition.cs" />
-    <Compile Include="OptionPageGrid.cs">
-      <SubType>Component</SubType>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Fortran_language_server_protocolPackage.cs" />
   </ItemGroup>
