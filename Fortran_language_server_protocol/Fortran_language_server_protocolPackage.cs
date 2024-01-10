@@ -10,7 +10,6 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading.Tasks;
 using System.ComponentModel.Composition;
-using System.IO;
 
 namespace Fortran_language_server_protocol
 {
@@ -51,19 +50,17 @@ namespace Fortran_language_server_protocol
         {
             await Task.Yield();
 
-            OptionPageGrid page = (OptionPageGrid)GetDialogPage(typeof(OptionPageGrid));
-
             ProcessStartInfo info = new ProcessStartInfo
             {
-                FileName = page.LanguageServerExecutable,
-                Arguments = page.LanguageServerArguments,
+                FileName = LanguageServerExecutable,
+                Arguments = LanguageServerArguments,
                 RedirectStandardInput = true,
                 RedirectStandardOutput = true,
                 UseShellExecute = false,
                 CreateNoWindow = true
             };
 
-            Process process = new Process
+            System.Diagnostics.Process process = new System.Diagnostics.Process
             {
                 StartInfo = info
             };
@@ -97,6 +94,24 @@ namespace Fortran_language_server_protocol
         protected override async Task InitializeAsync(CancellationToken cancellationToken, IProgress<ServiceProgressData> progress)
         {
             await JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
+        }
+
+        public string LanguageServerExecutable
+        {
+            get
+            {
+                OptionPageGrid page = (OptionPageGrid)GetDialogPage(typeof(OptionPageGrid));
+                return page.LanguageServerExecutable;
+            }
+        }
+
+        public string LanguageServerArguments
+        {
+            get
+            {
+                OptionPageGrid page = (OptionPageGrid)GetDialogPage(typeof(OptionPageGrid));
+                return page.LanguageServerArguments;
+            }
         }
     }
 }
