@@ -17,6 +17,8 @@ namespace Fortran_language_server_protocol
     [Guid(Fortran_language_server_protocolPackage.PackageGuidString)]
     [Export(typeof(ILanguageClient))]
     [ContentType("fortran")]
+    [ProvideMenuResource("Menus.ctmenu", 1)]
+    [ProvideOptionPage(typeof(OptionPageGrid), "Fortran Language Server", "Options", 0, 0, true)]
     public sealed class Fortran_language_server_protocolPackage : AsyncPackage, ILanguageClient
     {
         private readonly IEnumerable<string> filesToWatch;
@@ -48,14 +50,10 @@ namespace Fortran_language_server_protocol
         {
             await Task.Yield();
 
-            int numThreads = Math.Max(Environment.ProcessorCount - 2, 1);
-            string fileName = "fortls";
-            string arguments = String.Format("--nthreads {0} --incl_suffixes F18 F23 --lowercase_intrinsics --incremental_sync", numThreads);
-
             ProcessStartInfo info = new ProcessStartInfo
             {
-                FileName = fileName,
-                Arguments = arguments,
+                FileName = LanguageServerExecutable,
+                Arguments = LanguageServerArguments,
                 RedirectStandardInput = true,
                 RedirectStandardOutput = true,
                 UseShellExecute = false,
@@ -96,6 +94,24 @@ namespace Fortran_language_server_protocol
         protected override async Task InitializeAsync(CancellationToken cancellationToken, IProgress<ServiceProgressData> progress)
         {
             await JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
+        }
+
+        public string LanguageServerExecutable
+        {
+            get
+            {
+                OptionPageGrid page = (OptionPageGrid)GetDialogPage(typeof(OptionPageGrid));
+                return page.LanguageServerExecutable;
+            }
+        }
+
+        public string LanguageServerArguments
+        {
+            get
+            {
+                OptionPageGrid page = (OptionPageGrid)GetDialogPage(typeof(OptionPageGrid));
+                return page.LanguageServerArguments;
+            }
         }
     }
 }
