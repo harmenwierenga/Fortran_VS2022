@@ -1,37 +1,19 @@
 ﻿using Microsoft.VisualStudio.Shell;
-using System;
 using System.ComponentModel;
 
 namespace Fortran_language_server_protocol
 {
     public class OptionPageGrid : DialogPage
     {
-        private const string languageServerExecutableDefault = "fortls";
-        private const string languageServerArgumentsDefault = "--lowercase_intrinsics --incremental_sync";
-
-        public static string LanguageServerExecutableDefault
-        {
-            get
-            {
-                return languageServerExecutableDefault;
-            }
-        }
-
-        public static string LanguageServerArgumentsDefault
-        {
-            get
-            {
-                int numberOfThreads = Math.Max(Environment.ProcessorCount - 2, 1);
-                return languageServerArgumentsDefault + String.Format(" --nthreads {0}", numberOfThreads);
-            }
-        }
+        public const string LanguageServerExecutableDefault = "fortls";
+        public const string LanguageServerArgumentsDefault = "--lowercase_intrinsics";
 
         private string languageServerExecutable = LanguageServerExecutableDefault;
         private string languageServerArguments = LanguageServerArgumentsDefault;
 
         [Category("Fortran Language Server")]
         [DisplayName("Executable (path)")]
-        [Description("Path to language server executable, or name if it is on the Path. Default: " + languageServerExecutableDefault)]
+        [Description("Path to language server executable, or name if it is on the Path. Default: " + LanguageServerExecutableDefault)]
         public string LanguageServerExecutable
         {
             get { return languageServerExecutable; }
@@ -40,7 +22,7 @@ namespace Fortran_language_server_protocol
 
         [Category("Fortran Language Server")]
         [DisplayName("Command Line Arguments")]
-        [Description("Command line arguments to language server. Default: " + languageServerArgumentsDefault)]
+        [Description("Command line arguments to language server. Default: " + LanguageServerArgumentsDefault)]
         public string LanguageServerArguments
         {
             get { return languageServerArguments; }

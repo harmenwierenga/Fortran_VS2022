@@ -35,11 +35,11 @@ namespace Fortran_language_server_protocol
                 return null;
             }
             string fullOptionString = userSettingsStore.GetString(registryCollectionPath, optionName);
-            if (fullOptionString != null && fullOptionString.Length > 0 && fullOptionString.Split('*').Length == 3)
+            if (fullOptionString == null || fullOptionString.Length == 0 || fullOptionString.Split('*').Length != 3)
             {
-                return fullOptionString.Split('*')[2];
+                return null;
             }
-            return null;
+            return fullOptionString.Split('*')[2];
         }
 
         public Fortran_language_server_protocolPackage()
