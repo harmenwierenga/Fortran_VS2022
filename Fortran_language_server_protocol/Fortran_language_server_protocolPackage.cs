@@ -45,9 +45,7 @@ namespace Fortran_language_server_protocol
         public Fortran_language_server_protocolPackage()
         {
             ThreadHelper.ThrowIfNotOnUIThread();
-            filesToWatch = new List<string> {"*.f", "*.F", "*.f77", "*.F77",
-                    "*.f90", "*.F90", "*.f95", "*.F95", "*.f03", "*.F03",
-                    "*.f08", "*.F08", "*.f18", "*.F18", "*.f23", "*.F23"};
+            filesToWatch = new List<string> {"*.F", ".FOR", "*.F77", "*.F90", "*.F95", "*.F03", "*.F08", "*.F18", "*.F23"};
 
             SettingsManager settingsManager = new ShellSettingsManager(ServiceProvider.GlobalProvider);
             SettingsStore userSettingsStore = settingsManager.GetReadOnlySettingsStore(SettingsScope.UserSettings);
