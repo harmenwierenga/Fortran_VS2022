@@ -6,7 +6,7 @@ namespace Fortran_language_server_protocol
     public class OptionPageGrid : DialogPage
     {
         public const string LanguageServerExecutableDefault = "fortls";
-        public const string LanguageServerArgumentsDefault = "--lowercase_intrinsics";
+        public const string LanguageServerArgumentsDefault = "--lowercase_intrinsics --incremental_sync";
 
         private string languageServerExecutable = LanguageServerExecutableDefault;
         private string languageServerArguments = LanguageServerArgumentsDefault;
